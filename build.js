@@ -9,14 +9,15 @@ const fallbackConfig = {
   storageBucket: "vibecoding-todoapp-backend.firebasestorage.app",
   messagingSenderId: "474800373014",
   appId: "1:474800373014:web:fa925f3f6ec5493932a437",
-  databaseURL: "https://vibecoding-todoapp-backend-default-rtdb.firebaseio.com/",
+  databaseURL:
+    "https://vibecoding-todoapp-backend-default-rtdb.firebaseio.com/",
 };
 
 // Get environment variables (Vercel provides these)
 const envVars = {
   apiKey:
-    process.env.VITE_FIREBASE_API_KEY || 
-    process.env.FIREBASE_API_KEY || 
+    process.env.VITE_FIREBASE_API_KEY ||
+    process.env.FIREBASE_API_KEY ||
     fallbackConfig.apiKey,
   authDomain:
     process.env.VITE_FIREBASE_AUTH_DOMAIN ||
@@ -34,9 +35,9 @@ const envVars = {
     process.env.VITE_FIREBASE_MESSAGING_SENDER_ID ||
     process.env.FIREBASE_MESSAGING_SENDER_ID ||
     fallbackConfig.messagingSenderId,
-  appId: 
-    process.env.VITE_FIREBASE_APP_ID || 
-    process.env.FIREBASE_APP_ID || 
+  appId:
+    process.env.VITE_FIREBASE_APP_ID ||
+    process.env.FIREBASE_APP_ID ||
     fallbackConfig.appId,
   databaseURL:
     process.env.VITE_FIREBASE_DATABASE_URL ||
@@ -45,11 +46,14 @@ const envVars = {
 };
 
 // Check if environment variables are set (not using fallback)
-const usingFallback = !process.env.VITE_FIREBASE_API_KEY && !process.env.FIREBASE_API_KEY;
+const usingFallback =
+  !process.env.VITE_FIREBASE_API_KEY && !process.env.FIREBASE_API_KEY;
 if (usingFallback) {
-  console.warn('Warning: Using fallback Firebase config. Set environment variables in Vercel dashboard for production.');
+  console.warn(
+    "Warning: Using fallback Firebase config. Set environment variables in Vercel dashboard for production."
+  );
 } else {
-  console.log('Using environment variables from Vercel');
+  console.log("Using environment variables from Vercel");
 }
 
 // Read the HTML file
