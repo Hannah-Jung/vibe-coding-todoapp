@@ -75,9 +75,11 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-
 // Your web app's Firebase configuration
 // Use environment variables from window object (set by build script in Vercel) or fallback to local values
 const firebaseConfig =
-  window.firebaseConfig && window.firebaseConfig.apiKey
+  window.firebaseConfig && 
+  window.firebaseConfig.apiKey && 
+  window.firebaseConfig.databaseURL
     ? window.firebaseConfig
-    : ${JSON.stringify(envVars, null, 6)};
+    : ${JSON.stringify(fallbackConfig, null, 6)};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
