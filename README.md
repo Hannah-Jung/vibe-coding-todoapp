@@ -1,79 +1,49 @@
 # Todo App with Firebase
 
-A simple, modern todo application with Firebase Firestore integration. Add, edit, and delete tasks with real-time synchronization.
+A modern todo application built with vanilla JavaScript and Firebase Realtime Database.
 
 ## Features
 
-- ✅ Add new tasks
-- ✏️ Edit existing tasks
-- 🗑️ Delete tasks
-- 🔄 Real-time updates using Firebase Firestore
-- 📱 Responsive design
-- 🎨 Modern UI with smooth animations
+- ✅ Add, edit, and delete todos
+- 📌 Pin/unpin todos
+- ✅ Mark todos as complete/incomplete
+- 🔍 Real-time search functionality
+- 📱 Responsive design for mobile and desktop
+- 💾 Real-time synchronization with Firebase
 
 ## Setup
 
-1. **Create a Firebase Project**
-   - Go to [Firebase Console](https://console.firebase.google.com/)
-   - Create a new project
-   - Enable Firestore Database
-   - Get your Firebase configuration
+1. Clone the repository:
+```bash
+git clone https://github.com/Hannah-Jung/vibe-coding-todoapp.git
+cd vibe-coding-todoapp
+```
 
-2. **Configure Firebase**
-   - Open `firebase-config.js`
-   - Replace the placeholder values with your Firebase project configuration:
-     ```javascript
-     const firebaseConfig = {
-         apiKey: "YOUR_API_KEY",
-         authDomain: "YOUR_AUTH_DOMAIN",
-         projectId: "YOUR_PROJECT_ID",
-         storageBucket: "YOUR_STORAGE_BUCKET",
-         messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-         appId: "YOUR_APP_ID"
-     };
-     ```
+2. Create your Firebase configuration file:
+   - Copy `firebase-config.example.js` to `firebase-config.js`
+   - Replace the placeholder values with your actual Firebase credentials from the Firebase Console
 
-3. **Set up Firestore Rules**
-   - In Firebase Console, go to Firestore Database > Rules
-   - For development, you can use:
-     ```
-     rules_version = '2';
-     service cloud.firestore {
-       match /databases/{database}/documents {
-         match /todos/{document=**} {
-           allow read, write: if true;
-         }
-       }
-     }
-     ```
-   - ⚠️ **Note**: This rule allows anyone to read/write. For production, implement proper authentication.
+3. Open `index.html` in your browser or use a local server:
+```bash
+# Using Python
+python -m http.server 8000
 
-4. **Run the App**
-   - Install dependencies (optional, for local server):
-     ```bash
-     npm install
-     ```
-   - Start a local server:
-     ```bash
-     npm start
-     ```
-   - Or simply open `index.html` in your browser
+# Using Node.js http-server
+npx http-server
+```
 
-## Usage
+## Firebase Setup
 
-1. **Add a Task**: Type a task in the input field and click "Add Task" or press Enter
-2. **Edit a Task**: Click the "Edit" button on any task, modify the text, and click "Save"
-3. **Delete a Task**: Click the "Delete" button on any task and confirm
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project or select an existing one
+3. Enable Realtime Database
+4. Get your Firebase configuration from Project Settings > General > Your apps
+5. Copy the configuration values to `firebase-config.js`
 
-## Technologies Used
+## Security Note
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- Firebase Firestore
-- Firebase SDK v10.7.1
+⚠️ **IMPORTANT**: Never commit `firebase-config.js` to version control. It contains sensitive API keys. The file is already in `.gitignore`.
 
-## Browser Support
+## License
 
-Works on all modern browsers that support ES6+ and Firebase SDK.
-
+MIT
