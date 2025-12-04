@@ -2,6 +2,9 @@
 firebase-config.js
 firebase.js
 
+# Build output
+dist/
+
 # Environment variables
 .env
 .env.local
