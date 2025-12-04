@@ -56,7 +56,24 @@ if (usingFallback) {
   console.log("Using environment variables from Vercel");
 }
 
-// Generate firebase.js file with import.meta.env
+// Read the HTML file and inject Firebase config
+const htmlPath = path.join(__dirname, "index.html");
+let html = fs.readFileSync(htmlPath, "utf8");
+
+// Inject Firebase config into HTML
+const firebaseConfigScript = `<script>
+  window.firebaseConfig = ${JSON.stringify(envVars, null, 2)};
+</script>`;
+
+html = html.replace(
+  /<!-- Firebase config will be injected by build script -->\s*<script id="firebase-config-inject"><\/script>/,
+  firebaseConfigScript
+);
+
+fs.writeFileSync(htmlPath, html, "utf8");
+console.log("Firebase config injected into HTML successfully");
+
+// Generate firebase.js file
 const firebasePath = path.join(__dirname, "firebase.js");
 const firebaseContent = `// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
