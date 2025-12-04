@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>My Todo List</h1>
+      <p class="subtitle">Organize your tasks efficiently</p>
+    </header>
+
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search tasks...">
+      </div>
+    </div>
+
+    <div id="searchEmptyState" class="empty-state search-empty-state" style="display: none;">
+      <p>검색 결과가 없습니다</p>
+    </div>
+
+    <div class="todo-form">
+      <div class="todo-form-inputs">
+        <input type="text" id="todoTitleInputForm" class="todo-title-input-form" placeholder="Title"
+          style="display: none;">
+        <input type="text" id="todoInput" placeholder="Add a new task..." class="todo-input">
+      </div>
+      <button id="addBtn" class="btn btn-primary">Add Task</button>
+    </div>
+
+    <div class="todo-list-container">
+      <ul id="todoList" class="todo-list">
+        <!-- Todos will be dynamically added here -->
+      </ul>
+    </div>
+
+    <div id="emptyState" class="empty-state">
+      <p>No tasks yet. Add one above!</p>
+    </div>
+  </div>
+
+  <!-- Todo Detail Modal -->
+  <div id="todoDetailModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="backBtn" class="btn btn-back" title="Back"><i class="fas fa-arrow-left"></i></button>
+        <div class="modal-actions">
+          <button id="pinBtn" class="btn btn-pin" title="Pin"><i class="fas fa-thumbtack"></i></button>
+          <button id="deleteBtn" class="btn btn-danger" title="Delete"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="todoTitleInput" class="todo-title-input" placeholder="Title">
+        <div class="textarea-wrapper">
+          <textarea id="todoTextInput" class="todo-text-input" placeholder="Task description..."></textarea>
+          <div id="lastEditedTime" class="last-edited-time"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteConfirmModal" class="modal">
+    <div class="modal-content delete-confirm-modal">
+      <h2>Delete Task</h2>
+      <p>Are you sure you want to delete this task?</p>
+      <div class="modal-buttons">
+        <button id="deleteConfirmBtn" class="btn btn-danger">OK</button>
+        <button id="deleteCancelBtn" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Edit Task</h2>
+      <input type="text" id="editInput" class="todo-input" placeholder="Edit task...">
+      <div class="modal-buttons">
+        <button id="saveBtn" class="btn btn-primary">Save</button>
+        <button id="cancelBtn" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>
