@@ -60,13 +60,14 @@ if (usingFallback) {
 const htmlPath = path.join(__dirname, "index.html");
 let html = fs.readFileSync(htmlPath, "utf8");
 
-// Inject Firebase config into HTML
+// Inject Firebase config into HTML (replace placeholder script tag)
 const firebaseConfigScript = `<script>
   window.firebaseConfig = ${JSON.stringify(envVars, null, 2)};
 </script>`;
 
+// Replace the placeholder script tag with actual config
 html = html.replace(
-  /<!-- Firebase config will be injected by build script -->\s*<script id="firebase-config-inject"><\/script>/,
+  /<!-- Firebase config will be injected by build script from environment variables -->\s*<script id="firebase-config-inject"><\/script>/,
   firebaseConfigScript
 );
 
