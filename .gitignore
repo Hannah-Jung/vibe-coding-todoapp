@@ -1,0 +1,18 @@
+# Firebase config with sensitive keys
+firebase-config.js
+
+# Environment variables
+.env
+.env.local
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
