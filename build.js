@@ -56,34 +56,22 @@ if (usingFallback) {
   console.log("Using environment variables from Vercel");
 }
 
-// Read the HTML file
-const htmlPath = path.join(__dirname, "index.html");
-let html = fs.readFileSync(htmlPath, "utf8");
-
-// Replace placeholders in HTML
-html = html.replace(
-  /window\.firebaseConfig = \{[\s\S]*?\};/,
-  `window.firebaseConfig = ${JSON.stringify(envVars, null, 2)};`
-);
-
-// Write the modified HTML
-fs.writeFileSync(htmlPath, html, "utf8");
-console.log("Firebase config injected into HTML successfully");
-
-// Generate firebase-config.js file
-const firebaseConfigPath = path.join(__dirname, "firebase-config.js");
-const firebaseConfigContent = `// Import the functions you need from the SDKs you need
+// Generate firebase.js file with import.meta.env
+const firebasePath = path.join(__dirname, "firebase.js");
+const firebaseContent = `// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
 
 // Your web app's Firebase configuration
-// Use environment variables from window object (set by build script in Vercel) or fallback to local values
-const firebaseConfig =
-  window.firebaseConfig && 
-  window.firebaseConfig.apiKey && 
-  window.firebaseConfig.databaseURL
-    ? window.firebaseConfig
-    : ${JSON.stringify(fallbackConfig, null, 6)};
+const firebaseConfig = {
+  apiKey: ${JSON.stringify(envVars.apiKey)},
+  authDomain: ${JSON.stringify(envVars.authDomain)},
+  projectId: ${JSON.stringify(envVars.projectId)},
+  storageBucket: ${JSON.stringify(envVars.storageBucket)},
+  messagingSenderId: ${JSON.stringify(envVars.messagingSenderId)},
+  appId: ${JSON.stringify(envVars.appId)},
+  databaseURL: ${JSON.stringify(envVars.databaseURL)},
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -95,5 +83,5 @@ const database = getDatabase(app);
 export { database };
 `;
 
-fs.writeFileSync(firebaseConfigPath, firebaseConfigContent, "utf8");
-console.log("firebase-config.js generated successfully");
+fs.writeFileSync(firebasePath, firebaseContent, "utf8");
+console.log("firebase.js generated successfully");

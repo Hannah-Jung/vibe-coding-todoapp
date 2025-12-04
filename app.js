@@ -1,5 +1,5 @@
 // Import Firebase functions
-import { database } from "./firebase-config.js";
+import { database } from "./firebase.js";
 import {
   ref,
   push,

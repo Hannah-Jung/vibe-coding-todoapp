@@ -46,19 +46,19 @@ npx http-server
 
 1. Go to your Vercel project settings
 2. Navigate to **Environment Variables**
-3. Add the following environment variables:
-   - `FIREBASE_API_KEY` (or `VITE_FIREBASE_API_KEY`)
-   - `FIREBASE_AUTH_DOMAIN` (or `VITE_FIREBASE_AUTH_DOMAIN`)
-   - `FIREBASE_PROJECT_ID` (or `VITE_FIREBASE_PROJECT_ID`)
-   - `FIREBASE_STORAGE_BUCKET` (or `VITE_FIREBASE_STORAGE_BUCKET`)
-   - `FIREBASE_MESSAGING_SENDER_ID` (or `VITE_FIREBASE_MESSAGING_SENDER_ID`)
-   - `FIREBASE_APP_ID` (or `VITE_FIREBASE_APP_ID`)
-   - `FIREBASE_DATABASE_URL` (or `VITE_FIREBASE_DATABASE_URL`)
-4. The build script will automatically inject these values into the HTML during deployment
+3. Add the following environment variables (must use `VITE_` prefix):
+   - `VITE_FIREBASE_API_KEY`
+   - `VITE_FIREBASE_AUTH_DOMAIN`
+   - `VITE_FIREBASE_PROJECT_ID`
+   - `VITE_FIREBASE_STORAGE_BUCKET`
+   - `VITE_FIREBASE_MESSAGING_SENDER_ID`
+   - `VITE_FIREBASE_APP_ID`
+   - `VITE_FIREBASE_DATABASE_URL`
+4. The build script will automatically inject these values into `firebase.js` during deployment
 
 ## Security Note
 
-⚠️ **IMPORTANT**: Never commit `firebase-config.js` to version control. It contains sensitive API keys. The file is already in `.gitignore`.
+⚠️ **IMPORTANT**: Never commit `firebase.js` or `firebase-config.js` to version control. They contain sensitive API keys. These files are already in `.gitignore`. Environment variables should be set in Vercel dashboard for production deployments.
 
 ## License
 

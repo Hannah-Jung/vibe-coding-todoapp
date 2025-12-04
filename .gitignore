@@ -1,9 +1,11 @@
 # Firebase config with sensitive keys
 firebase-config.js
+firebase.js
 
 # Environment variables
 .env
 .env.local
+.env.*.local
 
 # Node modules
 node_modules/
