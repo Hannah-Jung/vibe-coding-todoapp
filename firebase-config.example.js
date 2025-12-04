@@ -23,4 +23,3 @@ const database = getDatabase(app);
 
 // Export database for use in other modules
 export { database };
-

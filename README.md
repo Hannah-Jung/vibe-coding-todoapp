@@ -34,11 +34,27 @@ npx http-server
 
 ## Firebase Setup
 
+### Local Development
+
 1. Go to [Firebase Console](https://console.firebase.google.com/)
 2. Create a new project or select an existing one
 3. Enable Realtime Database
 4. Get your Firebase configuration from Project Settings > General > Your apps
-5. Copy the configuration values to `firebase-config.js`
+5. Copy `firebase-config.example.js` to `firebase-config.js` and add your actual Firebase credentials
+
+### Vercel Deployment
+
+1. Go to your Vercel project settings
+2. Navigate to **Environment Variables**
+3. Add the following environment variables:
+   - `FIREBASE_API_KEY` (or `VITE_FIREBASE_API_KEY`)
+   - `FIREBASE_AUTH_DOMAIN` (or `VITE_FIREBASE_AUTH_DOMAIN`)
+   - `FIREBASE_PROJECT_ID` (or `VITE_FIREBASE_PROJECT_ID`)
+   - `FIREBASE_STORAGE_BUCKET` (or `VITE_FIREBASE_STORAGE_BUCKET`)
+   - `FIREBASE_MESSAGING_SENDER_ID` (or `VITE_FIREBASE_MESSAGING_SENDER_ID`)
+   - `FIREBASE_APP_ID` (or `VITE_FIREBASE_APP_ID`)
+   - `FIREBASE_DATABASE_URL` (or `VITE_FIREBASE_DATABASE_URL`)
+4. The build script will automatically inject these values into the HTML during deployment
 
 ## Security Note
 
