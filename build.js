@@ -1,10 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 
-// Read the HTML file
-const htmlPath = path.join(__dirname, "index.html");
-let html = fs.readFileSync(htmlPath, "utf8");
-
 // Get environment variables (Vercel provides these)
 const envVars = {
   apiKey:
@@ -41,6 +37,10 @@ if (missingVars.length > 0) {
   console.warn('Make sure to set Firebase environment variables in Vercel dashboard');
 }
 
+// Read the HTML file
+const htmlPath = path.join(__dirname, "index.html");
+let html = fs.readFileSync(htmlPath, "utf8");
+
 // Replace placeholders in HTML
 html = html.replace(
   /window\.firebaseConfig = \{[\s\S]*?\};/,
@@ -49,4 +49,30 @@ html = html.replace(
 
 // Write the modified HTML
 fs.writeFileSync(htmlPath, html, "utf8");
-console.log("Firebase config injected successfully");
+console.log("Firebase config injected into HTML successfully");
+
+// Generate firebase-config.js file
+const firebaseConfigPath = path.join(__dirname, "firebase-config.js");
+const firebaseConfigContent = `// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+// Your web app's Firebase configuration
+// Use environment variables from window object (set by build script in Vercel) or fallback to local values
+const firebaseConfig =
+  window.firebaseConfig && window.firebaseConfig.apiKey
+    ? window.firebaseConfig
+    : ${JSON.stringify(envVars, null, 6)};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Realtime Database
+const database = getDatabase(app);
+
+// Export database for use in other modules
+export { database };
+`;
+
+fs.writeFileSync(firebaseConfigPath, firebaseConfigContent, "utf8");
+console.log("firebase-config.js generated successfully");
